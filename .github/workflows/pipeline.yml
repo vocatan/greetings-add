@@ -12,6 +12,12 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      myVersion:
+        description: 'Input Version'
+      myValues:
+        description: 'Input Values'
 
 jobs:
   build:
@@ -35,6 +41,12 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
+
+    - name: Set timestamp
+      run: echo TDS=$(date +'%Y-%m-%dT%H-%M-%S') >> $GITHUB_ENV
+
+    - name: Tag artifact
+      run: mv build/libs/greetings-add.jar build/libs/greetings-add-${{ github.event.inputs.myVersion}}${{ env.TDS }}.jar
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4.3.0
