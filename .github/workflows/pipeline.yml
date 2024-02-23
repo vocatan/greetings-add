@@ -103,7 +103,7 @@ jobs:
     
      steps: 
      - id: report-count
-       uses: <your github id>/arg-count-action@main
+       uses: vocatan/arg-count-action@main
        with: 
          arguments-to-count: ${{ github.event.inputs.myValues }}
      - run: echo 
