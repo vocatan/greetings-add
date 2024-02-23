@@ -54,7 +54,7 @@ jobs:
       run: mv build/libs/greetings-add.jar build/libs/greetings-add-${{ github.event.inputs.myVersion}}${{ env.TDS }}.jar
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v4.3.0
+      uses: actions/upload-artifact@v4
       with:
         name: greetings-jar
         path: |
@@ -92,6 +92,7 @@ jobs:
 
      - name: Execute test
        shell: bash
-       run: | 
+       run: |
+         ls -l
          chmod +x ./test-script.sh
          ./test-script.sh ${{ needs.build.outputs.artifact-path }} ${{ github.event.inputs.myValues }}
