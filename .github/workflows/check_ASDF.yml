@@ -15,7 +15,7 @@ jobs:
 
     - name: Check for ASDF in App.js
       run: |
-        if grep -q "ASDF" App.js; then
-          echo "Error: ASDF found in App.js. Please remove it before merging."
+        if grep -q "ASDF" src/App.js; then
+          echo "Error: ASDF found in src/App.js. Please remove it before merging."
           exit 1
         fi
