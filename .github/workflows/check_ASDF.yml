@@ -1,0 +1,21 @@
+name: Check Pull Request
+
+on:
+  pull_request:
+    paths:
+      - '**/App.js'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check for ASDF in App.js
+      run: |
+        if grep -q "ASDF" App.js; then
+          echo "Error: ASDF found in App.js. Please remove it before merging."
+          exit 1
+        fi
