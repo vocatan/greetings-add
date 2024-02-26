@@ -13,20 +13,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Check for ASDF in App.js
-      run: |
-        if grep -q "ASDF" src/App.js; then
-          echo "Error: ASDF found in src/App.js. Please remove it before merging."
-          exit 1
-        fi
-
-    - name: Check for SEARCH_PATTERN in App.js
+    - name: Fetch pattern from secrets
       run: |
         SEARCH_PATTERN=${{ secrets.SEARCH_PATTERN }}
         
     - name: Check for pattern in App.js
       run: |
         echo "Looking for $SEARCH_PATTERN"
+        echo $SEARCH_PATTERN |wc 
         if grep -q "$SEARCH_PATTERN" src/App.js; then
           echo "Error: '$SEARCH_PATTERN' found in src/App.js. Please remove it before merging."
           exit 1
