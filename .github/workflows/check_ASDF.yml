@@ -1,4 +1,4 @@
-name: Check Pull Request
+name: Protect against secret leaks
 
 on:
   pull_request:
@@ -26,6 +26,7 @@ jobs:
         
     - name: Check for pattern in App.js
       run: |
+        echo "Looking for $SEARCH_PATTERN"
         if grep -q "$SEARCH_PATTERN" src/App.js; then
           echo "Error: '$SEARCH_PATTERN' found in src/App.js. Please remove it before merging."
           exit 1
